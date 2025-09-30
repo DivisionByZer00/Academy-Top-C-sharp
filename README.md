@@ -1,7 +1,5 @@
 # Academy-Top-C-sharp
 
-# Academy-Top-C-sharp
-
 #### Решения домашних заданий C#
 
 ## Homework 01
