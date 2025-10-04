@@ -1,0 +1,64 @@
+
+
+Console.WriteLine("--- Улучшенный калькулятор ---");
+
+// Получение первого числа
+Console.WriteLine("Введите первое число:");
+string firstInput = Console.ReadLine();
+double firstNumber = Convert.ToDouble(firstInput);
+
+// Получение второго числа
+Console.WriteLine("Введите второе число:");
+string secondInput = Console.ReadLine();
+double secondNumber = Convert.ToDouble(secondInput);
+
+
+// Выполнение арифметических операций
+double sum = firstNumber + secondNumber;
+double difference = firstNumber - secondNumber;
+double product = firstNumber * secondNumber;
+
+double quotient = firstNumber / secondNumber;
+
+
+
+double remainder = firstNumber % secondNumber;
+
+// выбор действия
+Console.WriteLine("Введите арифметическую операцию (-,+,*,/,%)(также можно словами):");
+string operation = Console.ReadLine();
+Console.WriteLine("--- Результат ---");
+switch (operation)
+{
+    case "-": Console.WriteLine($"{firstNumber} - {secondNumber} = {difference}"); break;
+    case "+": Console.WriteLine($"{firstNumber} + {secondNumber} = {sum}"); break;
+    case "*": Console.WriteLine($"{firstNumber} * {secondNumber} = {product}"); break;
+    case "/":
+        if (secondNumber == 0)  // проверка деления на 0
+        {
+            Console.WriteLine("Делить на 0 нельзя!");
+        }
+        else {
+            Console.WriteLine($"{firstNumber} / {secondNumber} = {quotient}");
+                } ; break;
+    case "%":
+        if (secondNumber == 0)
+        {
+            Console.WriteLine("Делить на 0 нельзя!");
+        }
+        else
+        {
+            Console.WriteLine($"{firstNumber} % {secondNumber} = {remainder}");
+        }
+        ; break;
+    case "сложение": goto case "+";  // использовал goto для краткости и улучшения читаемости кода
+    case "вычитание": goto case "-";
+    case "умножение": goto case "*";
+    case "деление": goto case "/";
+    case "остаток": goto case "%";
+    default: Console.WriteLine("Неправильный ввод, проверьте ещё раз"); break;  // если пользователь введет что-то не то
+}
+
+
+
+
