@@ -1,0 +1,13 @@
+Console.WriteLine("--- Калькулятор Индекса Массы Тела (ИМТ) ---");
+Console.WriteLine();
+Console.WriteLine("Введите ваш вес в килограммах:");
+
+double weight = Convert.ToDouble(Console.ReadLine()); // использую double так как значение может быть не целым, также конвертирую полученную строку от пользователя в double
+
+Console.WriteLine("Введите ваш рост в метрах (например, 1.75):");
+
+double height = Convert.ToDouble(Console.ReadLine());
+
+Console.WriteLine();
+Console.WriteLine("--- Ваш результат ---");
+Console.WriteLine($"При весе {weight} кг и росте {height} м, ваш ИМТ составляет: {weight / (height * height)}");
