@@ -1,0 +1,81 @@
+// Создаем "генератор" случайных чисел
+Random random = new Random();
+int secretNumber = random.Next(1, 101);
+
+int userGuess = 0;
+int attempts = 0;
+int attemptsLeft = 0;
+string continueGame= "s";
+int difficulty = 0;
+int maxRange = 0;
+
+do
+
+{
+    Console.WriteLine("Выберите сложность игры:");
+    Console.WriteLine("1. Случайное число от 1 до 10");
+    Console.WriteLine("2. Случайное число от 1 до 100");
+    Console.WriteLine("3. Случайное число от 1 до 1000");
+    Console.WriteLine("Напишите цифру от 1 до 3:");
+    difficulty = Convert.ToInt32(Console.ReadLine());
+
+
+    switch (difficulty)
+    {
+        case 1: secretNumber = random.Next(1, 11); maxRange = 10; break;
+        case 2: secretNumber = random.Next(1, 101); maxRange = 100;  break;
+        case 3: secretNumber = random.Next(1, 1001); maxRange = 1000;  break;
+        default: Console.WriteLine("Введите число от 1 до 3"); break;
+
+    }
+
+
+    Console.WriteLine();
+
+    Console.WriteLine("Введите кол-во попыток для угадывания числа:");
+    attemptsLeft = Convert.ToInt32(Console.ReadLine());
+    if (attemptsLeft <= 0)
+    {
+        Console.WriteLine("Количество попыток должно быть больше 0");
+    }
+
+    Console.WriteLine();
+    Console.WriteLine($"Я загадал число от 1 до {maxRange}. Попробуйте угадать!");
+    attempts = 0;
+    while (userGuess != secretNumber && attemptsLeft > 0)
+    {
+        Console.Write("Ваша догадка: ");
+        userGuess = Convert.ToInt32(Console.ReadLine());
+        attempts++;
+
+        if (userGuess < secretNumber)
+        {
+            Console.WriteLine("Загаданное число больше.");
+        }
+        else if (userGuess > secretNumber)
+        {
+            Console.WriteLine("Загаданное число меньше.");
+        }
+        attemptsLeft--;
+    }
+    if (attemptsLeft > 0)
+    {
+        Console.WriteLine($"Поздравляю! Вы угадали число {secretNumber} за {attempts} попыток.");
+    }
+    else
+    {
+        Console.WriteLine($"Попытки закончились! Загаданное число: {secretNumber}. Удачи в следующий раз!");
+    }
+
+        Console.WriteLine();
+
+    Console.WriteLine("Хотите играть ещё раз? (Y/n)");
+    continueGame = Console.ReadLine();
+    while (continueGame != "Y" && continueGame != "n")
+    {
+        Console.WriteLine("Неправильный ввод, введите либо 'Y' - да или 'n' - нет");
+        Console.WriteLine();
+        Console.WriteLine("Хотите играть ещё раз? (Y/n)");
+        continueGame = Console.ReadLine();
+    }
+} while (continueGame == "Y");
