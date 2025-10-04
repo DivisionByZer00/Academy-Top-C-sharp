@@ -1,0 +1,86 @@
+static void sum(double firstNumber, double secondNumber)
+{
+    double s = firstNumber + secondNumber;
+    Console.WriteLine("--- Результат ---");
+    Console.WriteLine($"{firstNumber} + {secondNumber} = {s}");
+}
+static void difference(double firstNumber, double secondNumber)
+{
+    double dif = firstNumber - secondNumber;
+    Console.WriteLine("--- Результат ---");
+    Console.WriteLine($"{firstNumber} - {secondNumber} = {dif}");
+}
+static void product(double firstNumber, double secondNumber)
+{
+    double prod = firstNumber * secondNumber;
+    Console.WriteLine("--- Результат ---");
+    Console.WriteLine($"{firstNumber} * {secondNumber} = {prod}");
+}
+static void quotient(double firstNumber, double secondNumber)
+{
+    if (secondNumber == 0)  // проверка деления на 0
+    {
+        Console.WriteLine("Делить на 0 нельзя!");
+    }
+    else
+    {
+        double quo = firstNumber / secondNumber;
+        Console.WriteLine("--- Результат ---");
+        Console.WriteLine($"{firstNumber} / {secondNumber} = {quo}");
+    }
+}
+static void remainder(double firstNumber, double secondNumber)
+{
+    
+    if (secondNumber == 0)
+    {
+        Console.WriteLine("Делить на 0 нельзя!");
+    }
+    else
+    {
+        double rema = firstNumber % secondNumber;
+        Console.WriteLine("--- Результат ---"); 
+        Console.WriteLine($"{firstNumber} % {secondNumber} = {rema}");
+    }
+}
+
+
+
+Console.WriteLine("--- Улучшенный калькулятор ---");
+
+// Получение первого числа
+Console.WriteLine("Введите первое число:");
+string firstInput = Console.ReadLine();
+double firstNumber = Convert.ToDouble(firstInput);
+
+// Получение второго числа
+Console.WriteLine("Введите второе число:");
+string secondInput = Console.ReadLine();
+double secondNumber = Convert.ToDouble(secondInput);
+
+
+
+// выбор действия
+Console.WriteLine("Введите арифметическую операцию (-,+,*,/,%)(также можно словами):");
+string operation = Console.ReadLine();
+switch (operation)
+{
+    case "-": difference(firstNumber, secondNumber); break;
+    case "+": sum(firstNumber, secondNumber); break;
+    case "*": product(firstNumber, secondNumber); break;
+    case "/": quotient(firstNumber, secondNumber); break;
+    case "%": remainder(firstNumber, secondNumber); break;
+
+    case "вычитание": difference(firstNumber, secondNumber); break;
+    case "сложение": sum(firstNumber, secondNumber); break;
+    case "умножение": product(firstNumber, secondNumber); break;
+    case "деление": quotient(firstNumber, secondNumber); break;
+    case "остаток": remainder(firstNumber, secondNumber); break;
+
+
+    default: Console.WriteLine("Неправильный ввод, проверьте ещё раз"); break;  // если пользователь введет что-то не то
+}
+
+
+
+
