@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine("--- Асинхронный загрузчик файлов ---");
+        Console.WriteLine();
+
+        string[] files = { "photo.jpg", "document.docx", "archive.zip" };
+
+        Console.WriteLine($"Запускаю загрузку {files.Length} файлов...");
+        Console.WriteLine();
+
+        Stopwatch stopwatch = Stopwatch.StartNew();
+ 
+        List<Task> downloadTasks = new List<Task>();
+        foreach (string file in files)
+        {
+            downloadTasks.Add(DownloadFile(file));
+        }
+
+        Console.WriteLine("\nВсе загрузки запущены, ожидаем завершения...\n");
+
+
+        await Task.WhenAll(downloadTasks);
+
+        stopwatch.Stop();
+
+        Console.WriteLine("\n--- Результаты ---");
+        foreach (string file in files)
+        {
+            Console.WriteLine($"Файл '{file}' успешно загружен");
+        }
+
+        Console.WriteLine($"\nОбщее время на все загрузки: {stopwatch.ElapsedMilliseconds} мс");
+    }
+
+    static async Task DownloadFile(string fileName)
+    {
+        Console.WriteLine($"Начинаю загрузку файла '{fileName}'...");
+
+        Random rand = new Random();
+        int delay = rand.Next(1000, 3000);
+        await Task.Delay(delay);
+    }
+}
