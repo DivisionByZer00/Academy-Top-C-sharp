@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+
+
+
+}
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+
+
+        string a = "Вот дом, Который построил Джек. А это пшеница, Которая в темном чулане хранится В доме, Который построил Джек.";
+        a = a.ToLower().Trim();
+        a = a.Replace(", ", " ").Replace(".", " ").Replace(". ", " ").Replace(", ", " ").Replace("  ", " ");
+
+        Dictionary<string, int> Words = new Dictionary<string, int>();
+        string[] words_list = a.Split(' ')
+                       .Where(w => !string.IsNullOrWhiteSpace(w))
+                       .ToArray();
+
+
+        foreach (string word in words_list)
+        {
+            if (Words.ContainsKey(word))
+            {
+                Words[word] = Words[word] + 1;
+            }
+            else
+            {
+                Words.Add(word, 1);
+            }
+        }
+        foreach (var pair in Words)
+        {
+            Console.WriteLine($"- слово: '{pair.Key}', встречается: {pair.Value} раз(а)");
+
+        }
+
+
+    }
+
+}
