@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+
+
+
+}
+
+class Program
+{
+    static void methodOne(int[] numbers, int targetSum)
+    {
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            for (int j = i + 1; j < numbers.Length; j++)
+            {
+                if (numbers[i] + numbers[j] == targetSum)
+                {
+                    Console.WriteLine($"Найдена пара: {numbers[i]} и {numbers[j]}");
+                    return;
+                }
+            }
+        }
+        Console.WriteLine("Пара не найдена");
+    }
+
+
+    static void methodTwo(int[] numbers, int targetSum)
+    {
+        Array.Sort(numbers);
+        int left = 0;
+        int right = numbers.Length - 1;
+
+        while (left < right)
+        {
+            int sum = numbers[left] + numbers[right];
+            if (sum == targetSum)
+            {
+                Console.WriteLine($"Найдена пара: {numbers[left]} и {numbers[right]}");
+                return;
+            }
+            else if (sum < targetSum)
+            {
+                left++;
+            }
+            else
+            {
+                right--;
+            }
+        }
+
+        Console.WriteLine("Пара не найдена.");
+    }
+
+
+    static void Main(string[] args)
+    {
+        int[] numbers = { 3, 5, -4, 8, 11, 1, -1, 6 };
+        int summ = 10;
+
+        Console.WriteLine("--- Анализ сложности алгоритмов поиска пары ---");
+        Console.WriteLine();
+        Console.Write("Исходный массив: ");
+        foreach (int i in numbers) Console.Write($"{i} ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Целевая сумма: {summ}");
+        Console.WriteLine();
+
+        Console.WriteLine("Запуск \"наивного\" метода (O(N^2))...");
+        methodOne(numbers, summ);
+
+        Console.WriteLine();
+        Console.WriteLine("Запуск эффективного метода (O(N))...");
+        methodTwo(numbers, summ);
+    }
+}
