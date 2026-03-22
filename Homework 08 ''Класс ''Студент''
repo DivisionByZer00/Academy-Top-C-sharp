@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+    public class Student
+    {
+        private int _age;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age
+        {
+
+            get
+            {
+                return _age;
+            }
+
+
+            set
+            {
+
+                if (value > 6 && value < 100)
+                {
+                    _age = value;
+                }
+                else
+                {
+                    Console.WriteLine("Ошибка: некорректный возраст!");
+                }
+            }
+        }
+
+
+        public Student(string firstName, string lastName, int Age)
+        {
+
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Age = Age;
+
+        }
+
+        public Student(string firstName, string lastName)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Age = 18;
+        }
+
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
+
+
+    }
+}
+class Program
+{
+    public static void Main(string[] args)
+    {
+
+        Student student1 = new Student("Иван", "Петров", 19);
+        Student student2 = new Student("Анна", "Сидорова", 20);
+
+        Console.WriteLine("--- Создание профилей студентов ---\n");
+        Console.WriteLine($"Студент 1:\nПривет, меня зовут {student1.FullName}, мне {student1.Age} лет.\nПолное имя: {student1.FullName}\n");
+        Console.WriteLine($"Студент 2:\nПривет, меня зовут {student2.FullName}, мне {student2.Age} лет.\nПолное имя: {student2.FullName}\n");
+
+        Console.WriteLine("--- Попытка изменить возраст на некорректное значение ---");
+        student1.Age = 266; 
+        Console.WriteLine($"Текущий возраст студента 1: {student1.Age}");
+
+
+
+    }
+}
