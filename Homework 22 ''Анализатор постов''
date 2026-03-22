@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml;
+using Newtonsoft.Json;
+using Formatting = Newtonsoft.Json.Formatting;
+
+public class Post
+{
+    public int UserId { get; set; }
+    public int Id { get; set; }
+
+    public string? Title { get; set; }
+    public string? Body { get; set; }
+}
+
+class Program
+{
+    static async Task Main()
+    {
+        Console.WriteLine("Загрузка списка постов...");
+
+        string url = "https://jsonplaceholder.typicode.com/posts";
+
+        
+        using HttpClient client = new HttpClient();
+
+        string json = await client.GetStringAsync(url);
+
+        Console.WriteLine("Данные успешно загружены!\n");
+
+        List<Post>? posts = JsonConvert.DeserializeObject<List<Post>>(json);
+
+
+        Console.WriteLine("--- Анализ постов ---\n");
+
+        foreach (var post in posts)
+        {
+             Console.WriteLine($"Пост {post.Id} (Автор ID: {post.UserId})");
+             Console.WriteLine($"Заголовок: {post.Title ?? "[нет заголовка]"}");
+             Console.WriteLine($"Текст: {post.Body ?? "[нет текста]"}");
+             Console.WriteLine();
+        }
+        
+        
+    }
+}
