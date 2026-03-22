@@ -1,0 +1,53 @@
+public static void Main(string[] args)
+{
+
+     
+    List<Student> students = GetStudents(); // Получаем список студентов
+
+    
+    var HStudentsQuery = students.Where(s => s.Points >= 75 && s.Points <= 90);
+
+    // Выполняем и выводим результат
+    foreach (Student student in HStudentsQuery)
+    {
+        Console.WriteLine(student.FullName);
+        Console.WriteLine(student.Points);
+    }
+
+
+
+
+
+    // 'Select' преобразует каждый объект Student в строку (его имя)
+    IEnumerable<string> studentNames = students.Select(s => s.FullName);
+
+    foreach (string name in studentNames)
+    {
+        Console.WriteLine(name);
+    }
+
+
+
+
+
+    var Students_sort = students.OrderBy(s => s.Age);
+
+    foreach (Student student in Students_sort)
+    {
+        Console.WriteLine(student.FullName); 
+    }
+
+
+    var rating = students
+        .Where(s => s.Age < 25)                        
+        .OrderByDescending(s => s.Points)              
+        .Select(s => $"{s.FullName} - {s.Points}");    
+
+    // Выводим результат
+    foreach (string info in rating)
+    {
+        Console.WriteLine(info);
+    }
+
+
+}
