@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml;
+using Newtonsoft.Json;
+using Formatting = Newtonsoft.Json.Formatting;
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
+class Program
+{
+    static async Task Main()
+    {
+        Console.WriteLine("--- Параллельный анализатор файлов ---");
+        Console.WriteLine("Нажмите любую клавишу для отмены...\n");
+
+        string[] files = { "file1.txt", "file2.txt"};
+
+        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationToken token = cts.Token;
+
+        Task cancelTask = Task.Run(() =>
+        {
+
+            Console.ReadKey();
+            cts.Cancel();
+        });
+
+        List<Task<FileResult>> tasks = new List<Task<FileResult>>();
+
+        foreach (var file in files)
+        {
+            tasks.Add(AnalyzeFileAsync(file, token));
+        }
+
+        try
+        {
+            FileResult[] results = await Task.WhenAll(tasks);
+
+            Console.WriteLine("\n--- Результаты анализа ---");
+
+            foreach (var result in results)
+            {
+                Console.WriteLine($"- Анализ файла '{result.FileName}' завершен. Размер: {result.Length} символов.");
+            }
+
+            Console.WriteLine("\nВсе операции успешно завершены.");
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("\nОперация была отменена пользователем.");
+        }
+    }
+
+
+    public class FileResult
+    {
+        public string FileName { get; set; }
+        public int Length { get; set; }
+    }
+
+
+    static async Task<FileResult> AnalyzeFileAsync(string fileName, CancellationToken token)
+    {
+        Console.WriteLine($"Запускаю анализ файла {fileName}...");
+
+
+        token.ThrowIfCancellationRequested();
+
+        string content = await File.ReadAllTextAsync(fileName);
+        int len = content.Length;
+
+        for (int i = 1; i <= 5; i++)
+        {
+            token.ThrowIfCancellationRequested();
+            Console.WriteLine($"Анализ {fileName}: шаг {i} из 5...");
+            await Task.Delay(500);
+        }
+
+        return new FileResult
+        {
+            FileName = fileName,
+            Length = len
+        };
+    }
+
+
+}
