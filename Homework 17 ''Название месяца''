@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+
+
+
+}
+
+class Program
+{
+
+
+    static void Main(string[] args)
+    {
+        string[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+
+        while (true)
+        {
+            Console.WriteLine("Введите номер месяца (от 1 до 12):");
+
+            try
+            {
+                int number = Convert.ToInt32(Console.ReadLine());
+
+                if (number < 1 || number > 12)
+                {
+                    throw new ArgumentOutOfRangeException("Ошибка: номер месяца должен быть в диапазоне от 1 до 12.");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine($"Выбранный месяц: {months[number - 1]}");
+                Console.WriteLine("Программа успешно завершена. Нажмите Enter для выхода...");
+                Console.ReadLine();
+                break;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: пожалуйста, вводите только целые числа.");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Console.WriteLine("-------------------------------------");
+        }
+    }
+}
