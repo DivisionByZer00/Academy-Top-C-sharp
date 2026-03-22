@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+    
+    public interface IShape
+    {
+        double GetArea();
+        string Name { get; }
+    }
+
+    public class Rectangle : IShape
+    {
+        public string Name => "Rectangle";
+        public double Width { get; set; }
+        public double Height { get; set; }
+
+        public Rectangle(double width, double height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public double GetArea()
+        {
+            return Width * Height;
+        }
+    }
+
+
+    public class Circle : IShape
+    {
+        public string Name => "Circle";
+        public double Radius { get; set; }
+
+        public Circle(double radius)
+        {
+            Radius = radius;
+        }
+
+        public double GetArea()
+        {
+            return Math.PI * Radius * Radius;
+        }
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("--- Калькулятор площадей фигур ---");
+            Console.WriteLine();
+
+            List<IShape> shapes = new List<IShape>()
+            {
+                new Rectangle(5, 10),
+                new Circle(5),
+                new Rectangle(3, 8),
+                new Circle(10)
+            };
+
+            double totalArea = 0;
+
+            foreach (var shape in shapes)
+            {
+                double area = shape.GetArea();
+                totalArea += area;
+                Console.WriteLine($"Фигура: {shape.Name}, Площадь: {area}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Общая площадь всех фигур: {totalArea}");
+        }
+    }
+}
