@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
+    public class Rectangle
+    {
+        public double width;
+        public double height;
+
+        public double GetArea()
+        {
+            return width * height;
+        }
+        public double GetPerimeter()
+        {
+            return 2 * (width + height);
+        }
+        public double GetDiagonal()
+        {
+            return Math.Sqrt(width * width + height * height);
+        }
+    }
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Rectangle rect = new Rectangle();
+            rect.height = 10;
+            rect.width = 10;
+
+            double AreaRect = rect.GetArea();
+            double PeremeterRect = rect.GetPerimeter();
+            double DiagonalRect = rect.GetDiagonal();
+            
+
+
+            Rectangle rect2 = new Rectangle();
+            rect2.height = 35;
+            rect2.width = 5;
+
+            double AreaRect2 = rect2.GetArea();
+            double PerimeterRect2 = rect2.GetPerimeter();
+            double DiagonalRect2 = rect2.GetDiagonal();
+
+
+
+
+            Console.WriteLine("Прямоугольник 1:");
+            Console.WriteLine($" - Ширина: {rect.width}");
+            Console.WriteLine($" - Высота: {rect.height}");
+            Console.WriteLine($" - Площадь: {AreaRect}");
+            Console.WriteLine($" - Периметр: {PeremeterRect}");
+            Console.WriteLine($" - Диагональ: {DiagonalRect}");
+            Console.WriteLine();
+
+            Console.WriteLine("Прямоугольник 2:");
+            Console.WriteLine($" - Ширина: {rect2.width}");
+            Console.WriteLine($" - Высота: {rect2.height}");
+            Console.WriteLine($" - Площадь: {AreaRect2}");
+            Console.WriteLine($" - Периметр: {PerimeterRect2}");
+            Console.WriteLine($" - Диагональ: {DiagonalRect2}");
+
+        }
+    }
+}
