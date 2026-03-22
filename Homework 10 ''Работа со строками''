@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+
+    
+
+
+}
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        string a = " иванов иван,петров петр, сидорова Анна, бобров БОРИС ";
+        a = a.ToLower().Trim();
+        a = a.Replace(", ", ".").Replace(",", ".");
+
+        string[] users = a.Split('.');
+        int i = 1;
+
+        foreach (string user in users)
+        {
+            Console.Write($"{i}. ");
+            string[] names = user.Trim().Split(' ');
+
+            foreach (string name in names)
+            {
+                string n = name.Trim();
+
+                if (n.Length > 0)
+                {
+
+                    string namef = char.ToUpper(n[0]) + n.Substring(1);
+                    Console.Write(namef + " ");
+                }
+            }
+
+            Console.WriteLine();
+            i++;
+        }
+
+
+    }
+}
