@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApp3;
+
+namespace ConsoleApp3
+{
+
+
+
+}
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("--- Универсальный калькулятор ---");
+        Console.WriteLine("Введите первое число:");
+        double a = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Введите второе число:");
+        double b = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine();
+        Console.WriteLine("--- Результаты вычислений ---");
+
+        Action<string> add = message => Console.WriteLine($"{message} {a + b}");
+        Action<string> subtract = message => Console.WriteLine($"{message} {a - b}");
+        Action<string> multiply = message => Console.WriteLine($"{message} {a * b}");
+        Action<string> divide = message => Console.WriteLine($"{message} {a / b}");
+
+        add("Сложение:");
+        subtract("Вычитание:");
+        multiply("Умножение:");
+        divide("Деление:");
+
+
+
+    }
+
+
+}
